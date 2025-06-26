@@ -18,14 +18,14 @@ auth = BearerAuthProvider(
     audience="calculator"
 )
 
-# mcp = FastMCP(name="calculator", auth=auth)
-mcp = FastMCP(name="calculator")
+mcp = FastMCP(name="calculator", auth=auth)
+# mcp = FastMCP(name="calculator")
 
 
 @mcp.tool
 def multiply(a: float, b: float) -> float:
     """Multiplies two numbers together."""
-    print(f"원격 MCP 서버: Multiplying {a} and {b}")
+    print(f"원격 MCP 서버(Smithery): Multiplying {a} and {b}")
     return a * b
 
 if __name__ == "__main__":
