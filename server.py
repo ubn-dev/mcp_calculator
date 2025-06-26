@@ -18,7 +18,8 @@ auth = BearerAuthProvider(
     audience="calculator"
 )
 
-mcp = FastMCP(name="calculator", auth=auth)
+# mcp = FastMCP(name="calculator", auth=auth)
+mcp = FastMCP(name="calculator")
 
 
 @mcp.tool
@@ -32,6 +33,6 @@ if __name__ == "__main__":
         transport="streamable-http",
         host="0.0.0.0",
         port = int(os.getenv("PORT", 8000)),
-        path="/mcp/",
+        path="/mcp",
         log_level="debug",
     )
