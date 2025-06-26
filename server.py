@@ -1,5 +1,6 @@
 from fastmcp import FastMCP
 from fastmcp.server.auth import BearerAuthProvider
+import os
 
 public_key = """-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApuHurasLiK0K2GnY8C9M
@@ -17,22 +18,20 @@ auth = BearerAuthProvider(
     audience="calculator"
 )
 
-# mcp = FastMCP(name="calculator")
 mcp = FastMCP(name="calculator", auth=auth)
 
 
 @mcp.tool
 def multiply(a: float, b: float) -> float:
     """Multiplies two numbers together."""
-    print(f"원격 MCP 서버: Multiplying {a} and {b}")
+    print(f"원격 MCP 서버(Smithery 배포): Multiplying {a} and {b}")
     return a * b
 
 if __name__ == "__main__":
     mcp.run(
         transport="streamable-http",
-        # transport="sse",
         host="0.0.0.0",
-        port=8000,
-        path="/mcp/",
+        port = int(os.getenv("PORT", 8000)),
+        path="/mcp",
         log_level="debug",
     )
