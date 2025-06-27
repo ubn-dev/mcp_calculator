@@ -18,8 +18,8 @@ auth = BearerAuthProvider(
     audience="calculator"
 )
 
-mcp = FastMCP(name="calculator", auth=auth)
-# mcp = FastMCP(name="calculator")
+# mcp = FastMCP(name="calculator", auth=auth)
+mcp = FastMCP(name="calculator")
 
 
 @mcp.tool
